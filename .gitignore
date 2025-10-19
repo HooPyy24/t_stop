@@ -1,0 +1,17 @@
+# node_modules ทั้ง root และ subfolder
+node_modules/
+web/node_modules/
+
+# package lock ทั้ง root และ subfolder
+package-lock.json
+web/package-lock.json
+
+# ไฟล์ environment
+.env
+
+# ไฟล์ OS ที่ไม่จำเป็น
+.DS_Store
+Thumbs.db
+
+# ไฟล์ log
+*.log

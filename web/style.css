@@ -1,0 +1,184 @@
+/* --- Global Styles --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #1c273a 0%, #7896ca 100%); /* สีพื้นหลังไล่ระดับ */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ทำให้ body สูงเต็มหน้าจอ */
+}
+
+h1 {
+    color: #fff; /* สีข้อความขาว */
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* เงาข้อความ */
+}
+
+/* --- Container for Forms --- */
+.container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* เงากล่อง */
+    width: 100%;
+    max-width: 400px; /* จำกัดความกว้างสูงสุด */
+    box-sizing: border-box; /* รวม padding ใน width */
+}
+
+.container h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* --- Input Fields --- */
+input {
+    width: calc(100% - 20px); /* ลบ padding ออก */
+    padding: 12px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none; /* ลบเส้นขอบเมื่อ focus */
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #2575fc; /* สีขอบเมื่อ focus */
+}
+
+/* --- Buttons --- */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2574fc27; /* สีฟ้า */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px; /* เพิ่มระยะห่างด้านบน */
+}
+
+button:hover {
+    background-color: #6a11cb; /* สีม่วงเมื่อ hover */
+    transform: translateY(-2px); /* ปุ่มเด้งขึ้นเล็กน้อย */
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* --- Separator (hr) --- */
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 30px 0; /* ระยะห่างบนล่าง */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 500px) {
+    .container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .container h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+}
+/* --- NEW CSS for Modal Structure --- */
+
+/* โชว์ปุ่มหลัก 2 ปุ่ม ตรงกลางหน้าจอแทน container เดิม */
+.main-buttons {
+    display: flex;
+    gap: 20px; /* ระยะห่างระหว่างปุ่ม */
+    margin-top: 50px;
+}
+
+.main-buttons button {
+    width: 200px; /* กำหนดความกว้างปุ่มให้ใหญ่ขึ้น */
+    background-color: #ffffff; /* พื้นหลังสีขาว */
+    color: #043281; /* ตัวอักษรสีฟ้า */
+    border: 2px solid #d4def0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-buttons button:hover {
+    background-color: #eef; /* เปลี่ยนสีเล็กน้อยเมื่อ hover */
+    transform: translateY(-2px);
+}
+
+/* -------------------- Modal Styling -------------------- */
+.modal {
+    display: none; /* ซ่อนไว้ก่อนเริ่มต้น */
+    position: fixed; /* ให้อยู่เหนือทุกสิ่ง */
+    z-index: 1; /* อยู่ด้านหน้า */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* สามารถเลื่อนได้ถ้าเนื้อหาเยอะ */
+    background-color: rgba(0, 0, 0, 0.4); /* พื้นหลังทึบแสง 40% */
+}
+
+/* กล่องเนื้อหา Modal */
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto; /* อยู่กลางหน้าจอ (แนวตั้ง) และอยู่กลางหน้าจอ (แนวนอน) */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px; /* จำกัดความกว้าง */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* ปุ่มปิด (X) */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animation สำหรับ Modal */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+
+.modal-content h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}

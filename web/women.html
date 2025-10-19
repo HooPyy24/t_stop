@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สินค้าทั้งหมด</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap');
+    
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+    
+
+      color: #fff;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    /* Navbar */
+    .navbar {
+      background-color: #000;
+      border-bottom: 1px solid #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar img {
+      height: 85px;
+      width: auto;
+      filter: grayscale(100%);
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-icon img {
+      width: 32px; /* ย่อขนาดไอคอนลง */
+      filter: brightness(0) invert(1);
+      transition: 0.3s;
+    }
+
+    .cart-icon img:hover {
+      transform: scale(1.1);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 50%;
+      padding: 2px 6px;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      padding: 25px 15px;
+      background-color: #181a1b;
+    }
+
+    .search-bar input {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 15px;
+      outline: none;
+    }
+
+    /* Product Section */
+    .main {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 60px;
+      padding: 40px;
+      background: linear-gradient(to bottom, #ffffff 60%, #9a999c 100%);
+      
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      filter: grayscale(10%);
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover img {
+      filter: grayscale(0%);
+    }
+
+    .product-content {
+      padding: 15px;
+      color: #111;
+    }
+
+    .product-content h3 {
+      margin: 10px 0 8px;
+      font-size: 18px;
+      color: #000;
+    }
+
+    .product-content p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-weight: 600;
+      color: #007bff;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .btn-edit {
+      background-color: #111;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .btn-edit:hover {
+      background-color: #333;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: #f0f0f0;
+      padding: 70px 100px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer img {
+      height: 40px;
+      margin-bottom: 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    footer p {
+      margin: 5px 0;
+      opacity: 0.85;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid #ffffff5d;
+      margin-top: 40px;
+      padding-top: 20px;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    /* ลายน้ำ */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/3Nz3Kf9/fashion-watermark.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      opacity: 0.05;
+      z-index: -1;
+    }
+    .page-title {
+    background-color: #ffffff; /* เปลี่ยนพื้นหลังเพื่อให้ข้อความสีดำเห็นชัด */
+    padding: 20px 0;
+    text-align: center; /* จัดให้อยู่ตรงกลาง */
+    border-bottom: 2px solid #ddd;
+}
+
+.page-title h2 {
+    color: #000; /* สีดำ */
+    font-size: 2.5em; /* ตัวใหญ่ */
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+
+
+
+nav {
+      background-color: #000;
+      color: #fff;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav img {
+      height: 90px;
+      width: auto;
+      filter: grayscale(100%);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      background: #333;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #555;
+    }
+    
+
+    @media (max-width: 768px) {
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding: 60px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+
+  <nav class="navbar">
+    
+    <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+
+    <div class="cart-icon" onclick="goTocart()">
+         <a href="web.html">กลับไปเลือกซื้อสินค้า</a>
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="cart">
+      <div id="cartCount" class="cart-count">0</div>
+      
+    </div>
+  </nav>
+
+
+  <!-- Search bar -->
+ 
+
+<div class="page-title">
+    <h2>สินค้าทั้งหมด</h2>
+</div>
+
+
+
+  <!-- Product section -->
+  <section class="main" id="productContainer"></section>
+
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+      <p>ร้านขายเสื้อแฟชั่นระดับพรีเมียม</p>
+      <p>เรียบหรู ดูดี ในทุกโอกาส</p>
+    </div>
+
+    <div>
+      <h4>ติดต่อเรา</h4>
+      <p>อีเมล: shop@email.com</p>
+      <p>โทร: 081-234-5678</p>
+    </div>
+
+    <div>
+      <h4>ติดตามเรา</h4>
+      <p>Facebook / Instagram / Line</p>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 Clothing Shop | All Rights Reserved.
+    </div>
+
+
+
+
+  </footer>
+
+  <script>
+    const products = [
+      { id: 1, name: 'เสื้อยืด Oversize', price: 299, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'ผ้าคอตตอนแท้ 100% ใส่สบาย' },
+      { id: 2, name: 'เสื้อเชิ้ตลายสก๊อต', price: 399, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'ใส่ได้ทุกโอกาสทั้งเที่ยวและทำงาน' },
+      { id: 3, name: 'กางเกงยีนส์ขาเดฟ', price: 499, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'เนื้อผ้ายืด นุ่ม ใส่สบาย' },
+      { id: 4, name: 'เสื้อฮู้ดสีดำ', price: 599, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'ให้ความอบอุ่น สไตล์มินิมอล' },
+      { id: 5, name: 'หมวกแก๊ปแฟชั่น', price: 199, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'หมวกดีไซน์เท่ ใส่ได้ทุกเพศ' },
+      { id: 6, name: 'เสื้อโปโลคลาสสิก', price: 359, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'ผ้านุ่ม ดูดีทั้งลำลองและทางการ' },
+      { id: 7, name: 'กางเกงขาสั้นลายทาง', price: 279, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'ระบายอากาศดี ใส่สบายสุดๆ' },
+      { id: 8, name: 'แจ็คเก็ตยีนส์วินเทจ', price: 749, img: 'https://media.discordapp.net/attachments/452721418677780492/1428797918051045478/E0B980E0B897E0B8A1E0B980E0B89EE0B8A5E0B895E0B980E0B8AAE0B8B7E0B989E0B8ADE0B8A2E0B8B7E0B894E0B8AAE0B8B5E0B894E0B98DE0B8B2E0B980E0B89BE0B8A5E0B988E0B8B2.png?ex=68f3cf41&is=68f27dc1&hm=1da873ad2a7a6c1d516d9cad910e9cd402fe0194b810d4b5ae01ba6417491882&=&format=webp&quality=lossless', desc: 'เท่มีสไตล์ ใส่ได้ทุกเพศ' }
+    ];
+
+    let cart = [];
+
+    function renderProducts(items) {
+      const container = document.getElementById('productContainer');
+      container.innerHTML = '';
+      items.forEach(p => {
+        container.innerHTML += `
+          <div class="product-card">
+            <div class="product-img">
+              <img src="${p.img}" alt="${p.name}">
+            </div>
+            <div class="product-content">
+              <h3>${p.name}</h3>
+              <p>${p.desc}</p>
+              <span class="price">${p.price} ฿</span>
+              <button class="btn-edit" onclick="addToCart(${p.id})">เพิ่มลงตะกร้า</button>
+            </div>
+          </div>`;
+      });
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(item => item.id === id);
+      if (existing) existing.qty++;
+      else cart.push({ ...product, qty: 1 });
+      document.getElementById('cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0);
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function goTocart() {
+      window.location.href = 'cart.html';
+    }
+
+    function filterProducts() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(search));
+      renderProducts(filtered);
+    }
+
+    renderProducts(products);
+  </script>
+</body>
+</html>

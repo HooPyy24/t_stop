@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ตะกร้าสินค้า</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      background-color: #f6f6f6;
+      background-image: url('https://www.transparenttextures.com/patterns/fabric-of-squares.png');
+      background-repeat: repeat;
+      background-size: contain;
+      color: #111;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+ิ
+    /* Navbar */
+    nav {
+      background-color: #000;
+      color: #fff;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav img {
+      height: 90px;
+      width: auto;
+      filter: grayscale(100%);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      background: #333;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #555;
+    }
+
+    /* Section */
+    section {
+      padding: 80px 50px;
+      background: linear-gradient(to bottom, #ffffff 60%, #9a999c 100%);
+      min-height: 70vh;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+    }
+
+    th, td {
+      padding: 18px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      color: #111;
+    }
+
+    th {
+      background: #111;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    img {
+      width: 90px;
+      border-radius: 10px;
+    }
+
+    .total {
+      text-align: right;
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 30px;
+      color: #000;
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover { background: #333; }
+
+    /* Checkout Form */
+    .checkout-section {
+      margin-top: 60px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .checkout-section h3 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 25px;
+    }
+
+    .checkout-section label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #111;
+    }
+
+    .checkout-section input, .checkout-section select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 6px;
+      font-size: 15px;
+    }
+
+    .checkout-section button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: #f0f0f0;
+      padding: 70px 100px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer img {
+      height: 40px;
+      margin-bottom: 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    footer p {
+      margin: 5px 0;
+      opacity: 0.85;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid #ffffff5d;
+      margin-top: 40px;
+      padding-top: 20px;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/3Nz3Kf9/fashion-watermark.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      opacity: 0.05;
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 40px 20px; }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding: 60px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+    <a href="web.html">กลับไปเลือกซื้อสินค้า</a>
+  </nav>
+
+  <section>
+    <h2>ตะกร้าสินค้าของคุณ</h2>
+
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>สินค้า</th>
+          <th>ชื่อสินค้า</th>
+          <th>ราคา</th>
+          <th>จำนวน</th>
+          <th>ลบ</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="total" id="totalPrice">รวมทั้งหมด: 0 ฿</div>
+
+    <!-- checkout button -->
+    <div style="text-align:center; margin-top:40px;">
+      <button onclick="toggleCheckout()">ชำระเงิน</button>
+    </div>
+
+    <!-- checkout form -->
+    <div class="checkout-section" id="checkoutForm" style="display:none;">
+      <h3>ข้อมูลการชำระเงิน</h3>
+      <label>ชื่อ-นามสกุล</label>
+      <input type="text" id="fullname" placeholder="กรอกชื่อเต็ม" />
+
+      <label>ที่อยู่จัดส่ง</label>
+      <input type="text" id="address" placeholder="บ้านเลขที่ / ถนน / แขวง / เขต / จังหวัด" />
+
+      <label>เบอร์โทรศัพท์</label>
+      <input type="tel" id="phone" placeholder="เช่น 0812345678" />
+
+      <label>ชำระเงินปลายทาง</label>
+      
+
+      <button onclick="submitPayment()">ยืนยันการสั่งซื้อ</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+      <p>ร้านขายเสื้อแฟชั่นระดับพรีเมียม</p>
+      <p>เรียบหรู ดูดี ในทุกโอกาส</p>
+    </div>
+
+    <div>
+      <h4>ติดต่อเรา</h4>
+      <p>อีเมล: shop@email.com</p>
+      <p>โทร: 081-234-5678</p>
+    </div>
+
+    <div>
+      <h4>ติดตามเรา</h4>
+      <p>Facebook / Instagram / Line</p>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 Clothing Shop | All Rights Reserved.
+    </div>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const tbody = document.querySelector("#cartTable tbody");
+    const totalPrice = document.getElementById("totalPrice");
+
+    function renderCart() {
+      tbody.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        total += item.price * (item.qty || 1);
+        tbody.innerHTML += `
+          <tr>
+            <td><img src="${item.img}" alt="${item.name}"></td>
+            <td>${item.name}</td>
+            <td>${item.price} ฿</td>
+            <td>${item.qty || 1}</td>
+            <td><button onclick="removeItem(${index})">ลบ</button></td>
+          </tr>`;
+      });
+
+      totalPrice.textContent = "รวมทั้งหมด: " + total.toLocaleString() + " ฿";
+    }
+
+    function removeItem(i) {
+      cart.splice(i, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function toggleCheckout() {
+      const form = document.getElementById("checkoutForm");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+
+    function submitPayment() {
+      const name = document.getElementById("fullname").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      
+
+      if (!name || !address || !phone ) {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วนก่อนยืนยันการสั่งซื้อ");
+        return;
+      }
+
+      alert(`ขอบคุณคุณ ${name} ที่สั่งซื้อสินค้ากับเรา!\nระบบจะดำเนินการจัดส่งไปยังที่อยู่ที่ให้ไว้.`);
+      localStorage.removeItem("cart");
+      window.location.href = "web.html";
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

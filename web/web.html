@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ร้านขายเสื้อผ้า</title>
+  <style>
+    /* ---------------------- โครงสร้างพื้นฐาน ---------------------- */
+    body {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      background-color: #f6f6f6;
+      background-image: url('https://www.transparenttextures.com/patterns/fabric-of-squares.png');
+      background-repeat: repeat;
+      background-size: contain;
+      color: #ffffff;
+    }
+
+    /* แสงเงาเบาๆ ทั่วเว็บ */
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------------------- Navbar ---------------------- */
+    .navbar {
+      background-color: #000000;
+      border-bottom: 1px solid #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar img {
+      height: 100px;
+      width: auto;
+      filter: grayscale(100%);
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.3s, border-bottom 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: #000;
+      border-bottom: 2px solid #000;
+      padding-bottom: 4px;
+    }
+
+    /* ---------------------- Section หลัก ---------------------- */
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 120px;
+      padding: 100px 50px 180px;
+      background: linear-gradient(to bottom, #ffffff 60%, #9a999c 100%);
+    }
+
+    .gender-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      width: 380px;
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .gender-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .gender-card img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      filter: grayscale(15%);
+      transition: all 0.4s ease;
+    }
+
+    .gender-card:hover img {
+      filter: grayscale(0%);
+    }
+
+    .gender-title {
+      background-color: #111;
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 20px;
+    }
+
+    /* ---------------------- Footer ---------------------- */
+    footer {
+      background-color: #111;
+      color: #f0f0f0;
+      padding: 70px 100px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer img {
+      height: 40px;
+      margin-bottom: 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    footer p {
+      margin: 5px 0;
+      opacity: 0.85;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      border-top: 1px solid #ffffff5d;
+      margin-top: 40px;
+      padding-top: 20px;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    /* ---------------------- ลายน้ำเบาๆ ด้านหลัง ---------------------- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co/3Nz3Kf9/fashion-watermark.png'); /* ลายน้ำแบบ minimal เส้นโค้งเสื้อผ้า */
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      opacity: 0.05;
+      z-index: -1;
+    }
+
+    @media (max-width: 768px) {
+      .main {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .gender-card {
+        width: 90%;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding: 60px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+    <ul>
+     
+    </ul>
+  </nav>
+
+  <section class="main">
+    <div class="gender-card" onclick="window.location.href='men.html'">
+      <img src="image/boy.jpg" alt="ชาย" />
+      <div class="gender-title">ชาย</div>
+    </div>
+
+    <div class="gender-card" onclick="window.location.href='women.html'">
+      <img src="image/wo.jpg" alt="หญิง" />
+      <div class="gender-title">หญิง</div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <img src="image/LOGO.png" alt="โลโก้ร้าน" />
+      <p>ร้านขายเสื้อแฟชั่นระดับพรีเมียม</p>
+      <p>เรียบหรู ดูดี ในทุกโอกาส</p>
+    </div>
+
+    <div>
+      <h4>ติดต่อเรา</h4>
+      <p>อีเมล: shop@email.com</p>
+      <p>โทร: 081-234-5678</p>
+    </div>
+
+    <div>
+      <h4>ติดตามเรา</h4>
+      <p>Facebook / Instagram / Line</p>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 Clothing Shop | All Rights Reserved.
+    </div>
+  </footer>
+</body>
+</html>

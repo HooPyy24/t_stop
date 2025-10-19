@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>เข้าสู่ระบบ / สมัครสมาชิก</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1 style="text-align: center;">
+    Welcome to<br>Tong and Few shop
+</h1>
+    <div class="main-buttons">
+    <button onclick="openModal('register')">สมัครสมาชิก</button>
+    <button onclick="openModal('login')">เข้าสู่ระบบ</button>
+    <button onclick="location.href = '/web.html'" class="guest-button">เยี่ยมชม</button>
+  </div>
+
+    <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('register')">&times;</span>
+      <h2>สมัครสมาชิก</h2>
+      <input id="regUser" placeholder="Username">
+      <input id="regPass" type="password" placeholder="Password">
+      <button onclick="register()">สมัครสมาชิก</button>
+    </div>
+  </div>
+    
+    <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('login')">&times;</span>
+      <h2>เข้าสู่ระบบ</h2>
+      <input id="loginUser" placeholder="Username">
+      <input id="loginPass" type="password" placeholder="Password">
+      <button onclick="login()">เข้าสู่ระบบ</button>
+    </div>
+  </div>
+
+  <script>
+    // ฟังก์ชันใหม่สำหรับการเปิด/ปิด Modal
+    function openModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'block';
+    }
+
+    function closeModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'none';
+    }
+
+    // ฟังก์ชัน register และ login 
+    async function register() {
+      //
+      
+      const username = regUser.value;
+      const password = regPass.value;
+      const res = await fetch('/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      
+      if (data.message) {
+        alert(data.message);
+        closeModal('register'); // ปิด modal เมื่อสมัครสำเร็จ
+      } else {
+        alert(data.error);
+      }
+    }
+
+    async function login() {
+      
+      const username = loginUser.value;
+      const password = loginPass.value;
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username, password })
+      });
+      const data = await res.json();
+      
+      if (data.role === 'admin') location.href = '/admin.html';
+      else if (data.message) location.href = '/web.html';
+      else alert(data.error);
+    }
+      ///แบบ Guest Access เด้อ
+    function openModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'block';
+    }
+
+    function closeModal(type) {
+      document.getElementById(type + 'Modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

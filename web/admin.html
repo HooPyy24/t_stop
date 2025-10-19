@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>👑 Admin Panel</h1>
+  <div id="userList"></div>
+  <button onclick="logout()">ออกจากระบบ</button>
+
+  <script>
+    async function loadUsers() {
+      const res = await fetch('/admin/users');
+      const data = await res.json();
+      if (data.error) return location.href = '/';
+      userList.innerHTML = '<h3>รายชื่อผู้ใช้</h3>' +
+        data.map(u => `<p>${u.username} (${u.role})</p>`).join('');
+    }
+
+    async function logout() {
+      await fetch('/logout', { method: 'POST' });
+      location.href = '/';
+    }
+
+    loadUsers();
+  </script>
+</body>
+</html>
